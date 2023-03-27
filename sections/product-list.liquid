@@ -1,0 +1,96 @@
+{{ 'product_list.css' | asset_url | stylesheet_tag }}
+
+
+<div class="product-list page-width">
+  <h1 class="product-list__title">{{ section.settings.title }}</h1>
+  <div class="product-list__grid">
+    {% for product in section.settings.products.products limit: 4 %}
+      {% assign product = product.product %}
+      {% if product != blank %}
+        <div class="product-card">
+          <div class="product-card__image-wrapper">
+            <a href="{{ product.url }}">
+              <img
+                class="product-card__image"
+                src="{{ product.featured_media | image_url }}"
+                loading="lazy"
+                height=""
+                width=""
+                alt="{{ product.featured_media.alt }}"
+              >
+            </a>
+          </div>
+          <div class="product-card__info">
+            <h3 class="product-card__title">
+              {{ product.title }}
+            </h3>
+            <div class="product-card__price-wrapper">
+              {% render 'price' %}
+            </div>
+          </div>
+          <div class="product-card__rating">
+            {%
+              render 'rating_system',
+              rating: product.metafields.custom.rating_stars,
+              number_of_reviews: product.metafields.custom.number_of_ratings,
+            %}
+          </div>
+          <div class="product-card__color-swatches">
+            {% for variant in product.variants %}
+              {% assign mainImage = variant.featured_image | default: product.featured_image %}
+              <span
+                class="swatch swatch-{{ variant.id }}"
+                style="background-color: {{ variant.options[0] }}"
+                data-src="{{ mainImage | image_url }}"
+              >
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Customers also purchased"
+    },
+    {
+      "type": "collection",
+      "id": "products",
+      "label": "Products"
+    }
+  ],
+  "blocks": [
+
+  ],
+  "presets": [
+    {
+      "name": "Product List",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+document.querySelectorAll('.swatch').forEach(function (swatch) {
+  let productCard = swatch.closest('.product-card');
+  let mainImage = productCard.querySelector('.product-card__image');
+  let variantTitle = swatch.getAttribute('data-title');
+  let mainImageSrc = swatch.hasAttribute('data-src') ? swatch.getAttribute('data-src') : '';
+    swatch.addEventListener('mouseenter', function () {
+      mainImage.src = mainImageSrc;
+    });
+    swatch.addEventListener('click', function () {
+      mainImage.src = mainImageSrc;
+    });
+});
+</script>

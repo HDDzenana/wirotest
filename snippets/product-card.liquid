@@ -1,0 +1,94 @@
+{% comment %}
+  Product Card - BEM structure
+    Block: product-card
+    Elements:
+      - image-wrapper
+      - colors
+      - color
+      - details
+      - title
+      - price
+{% endcomment %}
+
+<div class="product-card">
+  <div class="product-card__image-wrapper">
+    <img src="{{ product.image.src }}" alt="{{ product.image.alt }}"/>
+  </div>
+  
+  <div class="product-card__colors colors">
+    {% for variant in product.variants %}
+      <div class="colors__color color" style="background-color: {{ variant.color }}">
+        {% if variant.image %}
+          <div class="color__overlay"></div>
+          <img src="{{ variant.image.src }}" alt="{{ variant.image.alt }}" class="color__image" />
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  
+  <div class="product-card__details details">
+    <h2 class="details__title title">{{ product.title }}</h2>
+    <p class="details__price price">${{ product.price }}</p>
+  </div>
+</div>
+
+
+<style>
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      height: fit-content;
+    }
+    
+    .product-card__image {
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .product-card__image img {
+      max-width: 100%;
+    }
+    
+    .product-card__content {
+      padding: 20px;
+    }
+    
+    .product-card__title {
+      font-size: 24px;
+      margin: 0;
+    }
+     
+    .product-card__description {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .product-card__details {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    
+    .product-card__price {
+      font-size: 24px;
+    }
+    
+    .product-card__swatches {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    
+    .product-card__swatch {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      border-radius: 50%;
+      border: none;
+    }
+    .product-card__swatch:focus{
+      outline: none;
+    }
+</style>

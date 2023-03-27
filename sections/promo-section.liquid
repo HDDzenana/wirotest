@@ -1,0 +1,147 @@
+{{ 'promo-section.css' | asset_url | stylesheet_tag }}
+
+<div class="promo page-width">
+  <div class="promo__text">
+    <h1>{{ section.settings.title }}</h1>
+    <p class="promo__description" style="color: {{ section.settings.description_text_color }}">
+      {{ section.settings.description }}
+    </p>
+    <a href="{{ section.settings.button_link }}" class="promo_button bold button">
+      {{- section.settings.button_title -}}
+    </a>
+  </div>
+  <div class="promo__images">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'col_1' %}
+          <div class="promo__images-col">
+            <img src="{{ block.settings.image_1 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+            <img src="{{ block.settings.image_2 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+            <img src="{{ block.settings.image_3 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+          </div>
+        {% when 'col_2' %}
+          <div class="promo__images-col">
+            <img src="{{ block.settings.image_1 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+            <img src="{{ block.settings.image_2 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+            <img src="{{ block.settings.image_3 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+          </div>
+        {% when 'col_3' %}
+          <div class="promo__images-col">
+            <img src="{{ block.settings.image_1 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+            <img src="{{ block.settings.image_2 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+            <img src="{{ block.settings.image_3 | image_url }}" loading="lazy" width="" height="" alt="{{ shop.name }}">
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promo Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "New collections are finally here"
+    },
+    {
+      "type": "color",
+      "id": "description_text_color",
+      "label": "Description Text Color",
+      "default": "#a6a6a6"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "You need it? We got it. We make finding your next home easy, comfortable and simple."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_title",
+      "label": "Button Title",
+      "default": "Shop Collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "col_1",
+      "name": "Column 1",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        }
+      ]
+    },
+    {
+      "type": "col_2",
+      "name": "Column 2",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        }
+      ]
+    },
+    {
+      "type": "col_3",
+      "name": "Column 3",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Section"
+    }
+  ]
+}
+{% endschema %}

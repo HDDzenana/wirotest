@@ -1,0 +1,43 @@
+ 
+  <div class="rating-system">
+    <div class="rating-system__number">
+      <span>({{ number_of_reviews }})</span>
+    </div>
+    <div class="rating-system__stars">
+  {% for i in (1..5) %}
+    {% if i <= rating %}
+      <svg class="yellow" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 1.28 1.28" enable-background="new 0 0 64 64" xml:space="preserve">
+            <path fill="#D5AB55" stroke="#FFFFF" stroke-width="0.04" stroke-miterlimit="10" points="32,47 12,62 20,38 2,24 24,24 32,1 40,24 
+              62,24 44,38 52,62 " d="M0.64 0.94L0.24 1.24L0.4 0.76L0.04 0.48L0.48 0.48L0.64 0.02L0.8 0.48L1.24 0.48L0.88 0.76L1.04 1.24Z"/>
+          </svg>
+    {% else %}
+      <svg class="blue" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 1.28 1.28">
+        <path fill="#E0E0E0" d="M0.64,0.94100004 L0.24,1.24 L0.4,0.76 L0.04,0.48 L0.48,0.48 L0.64,0.02 L0.8,0.48 L1.24,0.48 L0.88,0.76 L1.04,1.24 Z"/>
+      </svg>
+    {% endif %}
+  {% endfor %}
+</div>
+
+</div>
+<style>
+  .rating-system {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .rating-system__number {
+    font-size: 1.2rem;
+  }
+  .rating-system__stars {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .rating-system__stars svg {
+    margin: 0.1rem;
+  }
+</style>
+
+ 
